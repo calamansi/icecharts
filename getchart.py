@@ -32,5 +32,5 @@ with Image(filename=localfile) as img:
     with img.convert('gif') as converted:
         converted.save(filename='latest.gif')
 
-with open("latest.txt", "w") as f:
+with open('latest.txt', 'w') as f:
     f.write(latest_filename)

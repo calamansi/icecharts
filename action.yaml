@@ -11,6 +11,9 @@ runs:
     - name: Change ImageMagick policy to allow pdf->png conversion.
       run: sudo sed -i 's/^.*policy.*coder.*none.*PDF.*//' /etc/ImageMagick-6/policy.xml
       shell: bash
+    - name: Install ghostscript
+      run: sudo apt-get update && sudo apt-get install ghostscript -y
+      shell: bash
     - name: Install Dependencies
       run: pip install -r requirements.txt
       shell: bash

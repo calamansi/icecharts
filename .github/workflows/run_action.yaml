@@ -10,5 +10,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Get ice chart
-        id: get_square
+        id: get_chart
         uses: ./ # Uses an action in the root directory
