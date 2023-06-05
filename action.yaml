@@ -11,7 +11,7 @@ runs:
     - name: Change ImageMagick policy to allow pdf->png conversion.
       run: sudo sed -i 's/^.*policy.*coder.*none.*PDF.*//' /etc/ImageMagick-6/policy.xml
       shell: bash
-    - name: Install ghostscript
+    - name: Install Ghostscript
       run: sudo apt-get update && sudo apt-get install ghostscript -y
       shell: bash
     - name: Install Dependencies
@@ -23,7 +23,7 @@ runs:
       shell: bash
     - name: Commit results
       run: |
-          git add latest.git latest.txt
+          git add latest.gif latest.txt
           git commit -m 'Got new ice chart' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
       shell: bash
