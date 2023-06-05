@@ -14,4 +14,3 @@ jobs:
       - name: Get ice chart
         id: get_chart
         uses: ./ # Uses an action in the root directory
-
