@@ -15,3 +15,8 @@ runs:
       id: get-chart
       run: python getchart.py
       shell: bash
+    - name: Commit results
+      run: |
+          git add latest.git latest.txt
+          git commit -m 'Got new ice chart' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"

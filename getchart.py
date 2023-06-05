@@ -9,7 +9,8 @@ import urllib.request as urllib2
 import re
 from datetime import datetime
 
-html_page = urllib2.urlopen("https://ocean.dmi.dk/arctic/images/MODIS/CapeFarewell_RIC/")
+directory = 'https://ocean.dmi.dk/arctic/images/MODIS/CapeFarewell_RIC/'
+html_page = urllib2.urlopen(directory)
 
 soup = BeautifulSoup(html_page, 'html.parser')
 
@@ -17,44 +18,19 @@ msg = ''
 msg = 'Updated at (utc) ' + str(datetime.now()) + '\n'
 print(msg)
 
-for i, link in enumerate(soup.findAll('a', attrs={'href': re.compile("ISKO")})):
-    print(link)
+latest_filename = soup.findAll('a', attrs={'href': re.compile("ISKO")})[-1].get('href')
+print(latest_filename)
 
+latest_url = directory + latest_filename
+print(latest_url)
 
+localfile = 'latest.pdf'
+urlretrieve(latest_url, localfile)
 
-"""
-    imageLink = 'https://ocean.dmi.dk/arctic/' + link.get('value') + '.pdf'
-    print(imageLink)
+with Image(filename=localfile) as img:
+    img.resize(int(img.width/1.5), int(img.height/1.5))
+    with img.convert('gif') as converted:
+        converted.save(filename='latest.gif')
 
-
-    filename = "mysite/templates/green_ice/chart_" + str(i) + ".pdf"
-    print(filename, imageLink)
-    urlretrieve(imageLink, filename)
-    msg += 'http://www.dmi.dk' + link.get('href') + '\n'
-
-    with Image(filename=filename) as img:
-        with img.convert('png') as converted:
-            filenamepng = filename + ".png"
-            converted.save(filename=filenamepng)
-            print(filename)
-        with img.convert('jpg') as converted:
-            filenamejpg = filename + ".jpg"
-            converted.save(filename=filenamejpg)
-            print(filename)
-
-    with Image(filename=filename) as imgsmall:
-        imgsmall.resize(int(imgsmall.width/1.5), int(imgsmall.height/1.5))
-        print(imgsmall.width, imgsmall.size)
-        with imgsmall.convert('png') as converted:
-            filenamepng = filename + ".small.png"
-            converted.save(filename=filenamepng)
-            print(filenamepng, imgsmall.size)
-        with imgsmall.convert('jpg') as converted:
-            filenamejpg = filename + ".small.jpg"
-            converted.save(filename=filenamejpg)
-            print(filenamejpg, imgsmall.size)
-
-with open("mysite/templates/icelinks.txt", "w") as f:
-    f.write(msg)
-
-"""
+with open("latest.txt", "w") as f:
+    f.write(latest_filename)
