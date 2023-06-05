@@ -21,3 +21,11 @@ runs:
       id: get-chart
       run: python getchart.py
       shell: bash
+    - name: Commit results
+      run: |
+          git add latest.gif latest.txt
+	  git config --global user.name 'Angie Garz'
+          git config --global user.email 'angie.m.garz@gmail.com'
+          git commit -m "New ice chart"
+          git push
+      shell: bash
