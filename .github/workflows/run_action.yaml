@@ -1,6 +1,9 @@
 # .github/workflows/test_action.yaml
 name: Test Action
-on: [push]
+on:
+  schedule:
+    - cron: '0 */3 * * *'
+  push
 permissions:
   contents: write
 
