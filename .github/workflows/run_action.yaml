@@ -2,7 +2,7 @@
 name: Test Action
 on:
   schedule:
-    - cron: '*/6 * * * *'
+    - cron: '10 */3 * * *'
   push:
     branches: 
       - 'main'
