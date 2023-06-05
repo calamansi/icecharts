@@ -3,7 +3,9 @@ name: Test Action
 on:
   schedule:
     - cron: '0 */3 * * *'
-  push
+  push:
+    branches: 
+      - 'main'
 permissions:
   contents: write
 
