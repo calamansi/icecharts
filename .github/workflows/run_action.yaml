@@ -1,6 +1,8 @@
 # .github/workflows/test_action.yaml
 name: Test Action
 on: [push]
+permissions:
+  contents: write
 
 jobs:
   get-ice-chart:
@@ -8,7 +10,14 @@ jobs:
     name: Gets the latest ice chart
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Get ice chart
         id: get_chart
         uses: ./ # Uses an action in the root directory
+      - name: Commit results
+        run: |
+          git add latest.gif latest.txt
+	  git config --global user.name 'Angie Garz'
+          git config --global user.email 'angie.m.garz@gmail.com'
+          git commit -am "New ice chart"
+          git push
