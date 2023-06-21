@@ -26,6 +26,6 @@ runs:
           git add latest.gif latest.txt
           git config --global user.name 'Angie Garz'
           git config --global user.email 'angie.m.garz@gmail.com'
-          git commit -m "New ice chart" || echo "No changes to commit"
+          git commit -m "GitHub Action: Checked for new ice charts" || echo "No changes to commit"
           git push || echo "No changes to commit"
       shell: bash

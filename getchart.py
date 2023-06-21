@@ -31,4 +31,4 @@ with Image(filename=localfile) as img:
 
 with open('latest.txt', 'w') as f:
     f.write(latest_filename + '\n')
-    f.write('\nUpdated at ' + str(datetime.now(timezone.utc)) + ' UTC\n')
+    f.write('\nLast check at ' + str(datetime.now(timezone.utc)) + ' UTC\n')
