@@ -1,4 +1,4 @@
 beautifulsoup4==4.12.2
 bs4==0.0.1
 soupsieve==2.4.1
-Wand==0.6.11
+wand==0.6.11
