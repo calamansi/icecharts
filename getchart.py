@@ -32,7 +32,7 @@ with Image(filename=localfile) as img:
 
 ## ICEBERG MAP
 directory = 'http://polarportal.dk/fileadmin/polarportal/icebergs/'
-today = datetime.now().strftime('%Y%m%d')
+today = datetime.now(timezone.utc).strftime('%Y%m%d')
 latest_filename_iceberg = 'iceberg_map_Cape_Farewell_1080_EN_' + today + '_0615.png'
 print(latest_filename_iceberg)
 
@@ -40,18 +40,25 @@ latest_url = directory + latest_filename_iceberg
 print(latest_url)
 
 localfile = 'latest_iceberg.png'
-urlretrieve(latest_url, localfile)
 
-with Image(filename=localfile) as img:
-    img.alpha_channel = 'off'
-    img.merge_layers('flatten')
-    with img.convert('gif') as converted:
-        converted.resize(int(converted.width/1.7), int(converted.height/1.7), filter='sinc')
-        converted.save(filename='latest_iceberg.gif')
+try:
+    urlretrieve(latest_url, localfile)
+except:
+    with open('latest_iceberg.txt', 'r') as f:
+        latest_filename_iceberg = f.read()
+else:
+    with Image(filename=localfile) as img:
+        img.alpha_channel = 'off'
+        img.merge_layers('flatten')
+        with img.convert('gif') as converted:
+            converted.resize(int(converted.width/1.7), int(converted.height/1.7), filter='sinc')
+            converted.save(filename='latest_iceberg.gif')
+    with open('latest_iceberg.txt', 'w') as f:
+        f.write(latest_filename_iceberg)
 
 ## TEXT FILE
 with open('latest.txt', 'w') as f:
-    f.write('Latest ice chart:   ' + latest_filename_ice + '\n')
-    f.write('Latest iceberg map: ' + latest_filename_iceberg + '\n')
+    f.write('latest_ice.gif:     ' + latest_filename_ice + '\n')
+    f.write('latest_iceberg.gif: ' + latest_filename_iceberg + '\n')
     f.write('\n')
     f.write('Last check at:      ' + str(datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')) + ' UTC\n')
