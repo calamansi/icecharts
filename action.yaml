@@ -23,7 +23,7 @@ runs:
       shell: bash
     - name: Commit results
       run: |
-          git add latest.gif latest.txt
+          git add latest_ice.gif latest_iceberg.gif latest.txt
           git config --global user.name 'Angie Garz'
           git config --global user.email 'angie.m.garz@gmail.com'
           git commit -m "GitHub Action: Checked for new ice charts" || echo "No changes to commit"

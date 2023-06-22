@@ -1,4 +1,6 @@
+.DS_Store
 bin
 lib
-latest.pdf
-.DS_Store
+
+latest_ice.pdf
+latest_iceberg.png

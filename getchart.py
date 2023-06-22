@@ -9,17 +9,18 @@ import urllib.request as urllib2
 import re
 from datetime import datetime, timezone
 
+## ICE CHART
 directory = 'https://ocean.dmi.dk/arctic/images/MODIS/CapeFarewell_RIC/'
 html_page = urllib2.urlopen(directory)
 
 soup = BeautifulSoup(html_page, 'html.parser')
-latest_filename = soup.findAll('a', attrs={'href': re.compile("ISKO")})[-1].get('href')
-print(latest_filename)
+latest_filename_ice = soup.findAll('a', attrs={'href': re.compile("ISKO")})[-1].get('href')
+print(latest_filename_ice)
 
-latest_url = directory + latest_filename
+latest_url = directory + latest_filename_ice
 print(latest_url)
 
-localfile = 'latest.pdf'
+localfile = 'latest_ice.pdf'
 urlretrieve(latest_url, localfile)
 
 with Image(filename=localfile) as img:
@@ -27,8 +28,30 @@ with Image(filename=localfile) as img:
     img.merge_layers('flatten')
     with img.convert('gif') as converted:
         converted.resize(int(converted.width/1.7), int(converted.height/1.7), filter='sinc')
-        converted.save(filename='latest.gif')
+        converted.save(filename='latest_ice.gif')
 
+## ICEBERG MAP
+directory = 'http://polarportal.dk/fileadmin/polarportal/icebergs/'
+today = datetime.now().strftime('%Y%m%d')
+latest_filename_iceberg = 'iceberg_map_Cape_Farewell_1080_EN_' + today + '_0615.png'
+print(latest_filename_iceberg)
+
+latest_url = directory + latest_filename_iceberg
+print(latest_url)
+
+localfile = 'latest_iceberg.png'
+urlretrieve(latest_url, localfile)
+
+with Image(filename=localfile) as img:
+    img.alpha_channel = 'off'
+    img.merge_layers('flatten')
+    with img.convert('gif') as converted:
+        converted.resize(int(converted.width/1.7), int(converted.height/1.7), filter='sinc')
+        converted.save(filename='latest_iceberg.gif')
+
+## TEXT FILE
 with open('latest.txt', 'w') as f:
-    f.write(latest_filename + '\n')
-    f.write('\nLast check at ' + str(datetime.now(timezone.utc)) + ' UTC\n')
+    f.write('Latest ice chart:   ' + latest_filename_ice + '\n')
+    f.write('Latest iceberg map: ' + latest_filename_iceberg + '\n')
+    f.write('\n')
+    f.write('Last check at:      ' + str(datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')) + ' UTC\n')
