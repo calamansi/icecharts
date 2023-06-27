@@ -1,4 +1,4 @@
 latest_ice.gif:     202306242040.ISKO.pdf
-latest_iceberg.gif: iceberg_map_Cape_Farewell_1080_EN_20230626_0615.png
+latest_iceberg.gif: iceberg_map_Cape_Farewell_1080_EN_20230627_0615.png
 
-Last check at:      2023-06-27 03:32:53 UTC
+Last check at:      2023-06-27 06:29:28 UTC
