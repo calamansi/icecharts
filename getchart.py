@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 
 log = {}
 
-## ICE CHART VIA REST API
+## ICE CHARTS VIA REST API
 log['ice_chart'] = {}
 
 directory = 'https://www.dmi.dk/dmidk_byvejrWS/rest/icemaps/pdf/'
@@ -39,7 +39,13 @@ for region in ['Farewell', 'East', 'Greenland']:
             converted.resize(int(converted.width/1.7), int(converted.height/1.7), filter='cubic')
             converted.save(filename='latest_ice_' + region + '.gif')
 
-## ICEBERG MAP
+## AUTOMATIC ICE CHARTS
+# download gif directly
+latest_url = 'http://ocean.dmi.dk:8080/geoserver/autocharts/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fgif&TRANSPARENT=true&FORMAT_OPTIONS=layout%3AASIPchartlegend&BGCOLOR=0xFFFFFF&LEGEND_OPTIONS=fontAntiAliasing%3Atrue%3Bcolumns%3A2%3Bforcelabels%3Aon&LAYERS=autocharts%3Amostrecent_autochart_group&exceptions=application%2Fvnd.ogc.se_inimage&CRS=EPSG%3A999998&STYLES=&WIDTH=950&HEIGHT=1000&BBOX=1157589.9496888728%2C616410.7946925056%2C1737657.4483729554%2C1227018.8777443292'
+localfile = 'latest_ice_auto_East.gif'    
+urlretrieve(latest_url, localfile)
+
+## ICEBERG CHARTS
 log['iceberg_chart'] = {}
 
 directory = 'http://polarportal.dk/fileadmin/polarportal/icebergs/'
@@ -67,9 +73,8 @@ else:
             converted.resize(int(converted.width/1.7), int(converted.height/1.7), filter='sinc')
             converted.save(filename='latest_iceberg_Farewell.gif')
 
-
 ## WRITE LOG FILE
-log['last_check'] = str(datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')) + ' UTC'
+log['last_run'] = str(datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')) + ' UTC'
 print(log)
 with open('log.txt', 'w') as f:
     f.write(json.dumps(log, indent=4))
