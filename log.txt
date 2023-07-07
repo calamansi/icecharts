@@ -4,8 +4,6 @@
         "East": "chart3_East_202307060805_Colour.pdf",
         "Greenland": "chart0_Greenland_202307051200_Colour.pdf"
     },
-    "iceberg_chart": {
-        "Farewell": "iceberg_map_Cape_Farewell_1080_EN_20230706_0615.png"
-    },
-    "last_run": "2023-07-06 21:20:15 UTC"
+    "iceberg_chart": {},
+    "last_run": "2023-07-07 02:01:59 UTC"
 }
