@@ -1,11 +1,11 @@
 {
     "ice_chart": {
-        "Farewell": "chart1_CapeFarewell_202309250940_Colour.pdf",
-        "East": "chart3_East_202309252005_Colour.pdf",
+        "Farewell": "chart1_CapeFarewell_202309262050_Colour.pdf",
+        "East": "chart3_East_202309270815_Colour.pdf",
         "Greenland": "chart0_Greenland_202309241200_Colour.pdf"
     },
     "iceberg_chart": {
         "Farewell": "iceberg_map_Cape_Farewell_1080_EN_20230926_0615.png"
     },
-    "last_run": "2023-09-27 09:19:55 UTC"
+    "last_run": "2023-09-27 12:38:12 UTC"
 }
