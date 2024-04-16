@@ -7,5 +7,5 @@
     "iceberg_chart": {
         "Farewell": "iceberg_map_Cape_Farewell_1080_EN_20230707_0615.png"
     },
-    "last_run": "2024-04-16 18:52:17 UTC"
+    "last_run": "2024-04-16 19:03:03 UTC"
 }
